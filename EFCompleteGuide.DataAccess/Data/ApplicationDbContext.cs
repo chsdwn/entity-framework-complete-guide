@@ -5,10 +5,8 @@ namespace EFCompleteGuide.DataAccess.Data
 {
     public class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions options)
-            : base(options)
-        {
-        }
+        protected override void OnConfiguring(DbContextOptionsBuilder builder)
+            => builder.UseSqlite("Data Source=CleanCode.db");
 
         public DbSet<Category> Categories { get; set; }
     }
