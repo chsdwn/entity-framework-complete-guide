@@ -1,3 +1,4 @@
+using EFCompleteGuide.Model.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace EFCompleteGuide.DataAccess.Data
@@ -8,5 +9,7 @@ namespace EFCompleteGuide.DataAccess.Data
             : base(options)
         {
         }
+
+        public DbSet<Category> Categories { get; set; }
     }
 }
