@@ -2,8 +2,8 @@ namespace EFCompleteGuide.Model.Models
 {
     public class Genre
     {
-        public int GenreId { get; set; }
+        public int Genre_Id { get; set; }
         public string GenreName { get; set; }
-        public int DisplayOrder { get; set; }
+        // public int DisplayOrder { get; set; }
     }
 }
