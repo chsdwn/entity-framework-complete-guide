@@ -1,0 +1,1 @@
+### Dotnet Core SDK Version: 5.0.100-rc.1.20452.10
