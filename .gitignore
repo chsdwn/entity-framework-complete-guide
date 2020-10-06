@@ -364,3 +364,6 @@ FodyWeavers.xsd
 
 # Covarage file
 lcov.info
+
+# SQLite database file
+*.db
