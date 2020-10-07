@@ -7,7 +7,6 @@ namespace EFCompleteGuide.Model.Models
     public class Author
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)] // never generates id
         public int Author_Id { get; set; }
         [Required]
         public string FirstName { get; set; }

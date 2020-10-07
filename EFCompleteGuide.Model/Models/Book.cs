@@ -14,5 +14,8 @@ namespace EFCompleteGuide.Model.Models
         public string ISBN { get; set; }
         [Required]
         public double Price { get; set; }
+        [ForeignKey("Category")]
+        public int Category_Id { get; set; }
+        public Category Category { get; set; }
     }
 }
