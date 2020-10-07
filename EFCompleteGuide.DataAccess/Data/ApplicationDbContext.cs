@@ -14,11 +14,24 @@ namespace EFCompleteGuide.DataAccess.Data
                 .Entity<BookAuthor>()
                 .HasKey(bookAuthor => new { bookAuthor.Author_Id, bookAuthor.Book_Id });
 
-            /* --- FluentBookDetails --- */
-            // Key
-            modelBuilder.Entity<FluentBookDetail>().HasKey(b => b.BookDetail_Id);
-            // Required
-            modelBuilder.Entity<FluentBookDetail>().Property(b => b.NumberOfChapters).IsRequired();
+            #region FLUENT_MODELS
+            modelBuilder.Entity<FluentAuthor>().HasKey(a => a.Author_Id);
+            modelBuilder.Entity<FluentAuthor>().Property(a => a.FirstName).IsRequired();
+            modelBuilder.Entity<FluentAuthor>().Property(a => a.LastName).IsRequired();
+            modelBuilder.Entity<FluentAuthor>().Ignore(a => a.FullName);
+
+            modelBuilder.Entity<FluentBook>().HasKey(b => b.Book_Id);
+            modelBuilder.Entity<FluentBook>().Property(b => b.ISBN).IsRequired().HasMaxLength(15);
+            modelBuilder.Entity<FluentBook>().Property(b => b.Title).IsRequired();
+            modelBuilder.Entity<FluentBook>().Property(b => b.Price).IsRequired();
+
+            modelBuilder.Entity<FluentBookDetail>().HasKey(bd => bd.BookDetail_Id);
+            modelBuilder.Entity<FluentBookDetail>().Property(bd => bd.NumberOfChapters).IsRequired();
+
+            modelBuilder.Entity<FluentPublisher>().HasKey(p => p.Publisher_Id);
+            modelBuilder.Entity<FluentPublisher>().Property(p => p.Name).IsRequired();
+            modelBuilder.Entity<FluentPublisher>().Property(p => p.Location).IsRequired();
+            #endregion
         }
 
         public DbSet<Author> Authors { get; set; }
@@ -28,6 +41,9 @@ namespace EFCompleteGuide.DataAccess.Data
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Publisher> Publishers { get; set; }
 
+        public DbSet<FluentAuthor> FluentAuthors { get; set; }
+        public DbSet<FluentBook> FluentBooks { get; set; }
         public DbSet<FluentBookDetail> FluentBookDetails { get; set; }
+        public DbSet<FluentPublisher> FluentPublishers { get; set; }
     }
 }
