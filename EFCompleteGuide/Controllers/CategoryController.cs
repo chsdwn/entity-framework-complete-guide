@@ -57,5 +57,23 @@ namespace EFCompleteGuide.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult CreateMultiple2()
+        {
+            for (int i = 1; i <= 2; i++)
+                _dbContext.Categories.Add(new Category { Name = Guid.NewGuid().ToString() });
+            _dbContext.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult CreateMultiple5()
+        {
+            for (int i = 1; i <= 5; i++)
+                _dbContext.Categories.Add(new Category { Name = Guid.NewGuid().ToString() });
+            _dbContext.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
