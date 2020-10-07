@@ -3,10 +3,10 @@ namespace EFCompleteGuide.Model.Models
 {
     public class FluentBookAuthor
     {
-        public int Book_Id { get; set; }
-        public Book Book { get; set; }
+        public int FluentBook_Id { get; set; }
+        public FluentBook FluentBook { get; set; }
 
-        public int Author_Id { get; set; }
-        public Author Author { get; set; }
+        public int FluentAuthor_Id { get; set; }
+        public FluentAuthor FluentAuthor { get; set; }
     }
 }

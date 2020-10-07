@@ -16,7 +16,5 @@ namespace EFCompleteGuide.Model.Models
                 return $"{FirstName} {LastName}";
             }
         }
-
-        public ICollection<BookAuthor> BookAuthors { get; set; }
     }
 }
