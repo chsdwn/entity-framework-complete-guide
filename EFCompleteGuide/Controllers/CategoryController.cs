@@ -32,5 +32,30 @@ namespace EFCompleteGuide.Controllers
 
             return View(category);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Upsert(Category category)
+        {
+            if (!ModelState.IsValid) return View(category);
+
+            if (category.Category_Id == 0)
+                _dbContext.Categories.Add(category);
+            else
+                _dbContext.Categories.Update(category);
+
+            _dbContext.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Delete(int id)
+        {
+            var category = _dbContext.Categories.FirstOrDefault(c => c.Category_Id == id);
+            _dbContext.Categories.Remove(category);
+            _dbContext.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
