@@ -1,3 +1,5 @@
+using System;
+using System.IO;
 using EFCompleteGuide.DataAccess.FluentConfig;
 using EFCompleteGuide.Model.Models;
 using Microsoft.EntityFrameworkCore;
@@ -7,7 +9,7 @@ namespace EFCompleteGuide.DataAccess.Data
     public class ApplicationDbContext : DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
-            => builder.UseSqlite("Data Source=CleanCode.db");
+            => builder.UseSqlite($"Data Source={Path.Combine(Directory.GetCurrentDirectory(), "CleanCode.db")}");
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
