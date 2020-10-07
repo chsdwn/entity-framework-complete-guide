@@ -9,6 +9,6 @@ namespace EFCompleteGuide.DataAccess.Data
             => builder.UseSqlite("Data Source=CleanCode.db");
 
         public DbSet<Category> Categories { get; set; }
-        // public DbSet<Genre> Genres { get; set; }
+        public DbSet<Genre> Genres { get; set; }
     }
 }
