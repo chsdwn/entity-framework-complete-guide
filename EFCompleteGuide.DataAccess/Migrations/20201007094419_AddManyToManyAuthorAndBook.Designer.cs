@@ -3,14 +3,16 @@ using System;
 using EFCompleteGuide.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EFCompleteGuide.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201007094419_AddManyToManyAuthorAndBook")]
+    partial class AddManyToManyAuthorAndBook
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -83,9 +85,17 @@ namespace EFCompleteGuide.DataAccess.Migrations
                     b.Property<int>("Book_Id")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("Author_Id1")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("Book_Id1")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Author_Id", "Book_Id");
 
-                    b.HasIndex("Book_Id");
+                    b.HasIndex("Author_Id1");
+
+                    b.HasIndex("Book_Id1");
 
                     b.ToTable("BookAuthors");
                 });
@@ -167,15 +177,11 @@ namespace EFCompleteGuide.DataAccess.Migrations
                 {
                     b.HasOne("EFCompleteGuide.Model.Models.Author", "Author")
                         .WithMany("BookAuthors")
-                        .HasForeignKey("Author_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Author_Id1");
 
                     b.HasOne("EFCompleteGuide.Model.Models.Book", "Book")
                         .WithMany("BookAuthors")
-                        .HasForeignKey("Book_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Book_Id1");
 
                     b.Navigation("Author");
 

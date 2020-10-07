@@ -8,8 +8,14 @@ namespace EFCompleteGuide.DataAccess.Data
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
             => builder.UseSqlite("Data Source=CleanCode.db");
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+         => modelBuilder
+                .Entity<BookAuthor>()
+                .HasKey(bookAuthor => new { bookAuthor.Author_Id, bookAuthor.Book_Id });
+
         public DbSet<Author> Authors { get; set; }
         public DbSet<Book> Books { get; set; }
+        public DbSet<BookAuthor> BookAuthors { get; set; }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Publisher> Publishers { get; set; }
     }
