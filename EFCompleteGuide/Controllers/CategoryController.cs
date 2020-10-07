@@ -75,5 +75,25 @@ namespace EFCompleteGuide.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult RemoveMultiple2()
+        {
+            var categories = _dbContext.Categories.OrderByDescending(c => c.Category_Id).Take(2).ToList();
+            _dbContext.RemoveRange(categories);
+            _dbContext.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult RemoveMultiple5()
+        {
+            var categories = (from category in _dbContext.Categories.ToList()
+                              orderby category.Category_Id descending
+                              select category).Take(5).ToList();
+            _dbContext.RemoveRange(categories);
+            _dbContext.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
