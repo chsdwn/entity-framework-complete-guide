@@ -27,11 +27,24 @@ namespace EFCompleteGuide.DataAccess.Data
             modelBuilder.Entity<FluentBook>().Property(b => b.ISBN).IsRequired().HasMaxLength(15);
             modelBuilder.Entity<FluentBook>().Property(b => b.Title).IsRequired();
             modelBuilder.Entity<FluentBook>().Property(b => b.Price).IsRequired();
-            modelBuilder
-                .Entity<FluentBook>()
-                .HasOne(b => b.FluentBookDetail)
-                .WithOne(b => b.FluentBook)
-                .HasForeignKey<FluentBook>($"{nameof(FluentBookDetail)}_Id");
+            modelBuilder.Entity<FluentBook>()
+                        .HasOne(b => b.FluentBookDetail)
+                        .WithOne(bd => bd.FluentBook)
+                        .HasForeignKey<FluentBook>($"{nameof(FluentBookDetail)}_Id");
+            modelBuilder.Entity<FluentBook>()
+                        .HasOne(b => b.FluentPublisher)
+                        .WithMany(bp => bp.FluentBooks)
+                        .HasForeignKey(b => b.FluentPublisher_Id);
+
+            modelBuilder.Entity<FluentBookAuthor>().HasKey(ba => new { ba.FluentAuthor_Id, ba.FluentBook_Id });
+            modelBuilder.Entity<FluentBookAuthor>()
+                        .HasOne(ba => ba.FluentAuthor)
+                        .WithMany(a => a.FluentBookAuthors)
+                        .HasForeignKey(ba => ba.FluentAuthor_Id);
+            modelBuilder.Entity<FluentBookAuthor>()
+                        .HasOne(ba => ba.FluentBook)
+                        .WithMany(b => b.FluentBookAuthors)
+                        .HasForeignKey(ba => ba.FluentBook_Id);
 
             modelBuilder.Entity<FluentBookDetail>().HasKey(bd => bd.BookDetail_Id);
             modelBuilder.Entity<FluentBookDetail>().Property(bd => bd.NumberOfChapters).IsRequired();

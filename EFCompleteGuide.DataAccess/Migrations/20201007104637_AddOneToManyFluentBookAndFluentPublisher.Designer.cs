@@ -3,14 +3,16 @@ using System;
 using EFCompleteGuide.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EFCompleteGuide.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201007104637_AddOneToManyFluentBookAndFluentPublisher")]
+    partial class AddOneToManyFluentBookAndFluentPublisher
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -184,21 +186,6 @@ namespace EFCompleteGuide.DataAccess.Migrations
                     b.ToTable("FluentBooks");
                 });
 
-            modelBuilder.Entity("EFCompleteGuide.Model.Models.FluentBookAuthor", b =>
-                {
-                    b.Property<int>("FluentAuthor_Id")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("FluentBook_Id")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("FluentAuthor_Id", "FluentBook_Id");
-
-                    b.HasIndex("FluentBook_Id");
-
-                    b.ToTable("FluentBookAuthor");
-                });
-
             modelBuilder.Entity("EFCompleteGuide.Model.Models.FluentBookDetail", b =>
                 {
                     b.Property<int>("BookDetail_Id")
@@ -329,25 +316,6 @@ namespace EFCompleteGuide.DataAccess.Migrations
                     b.Navigation("FluentPublisher");
                 });
 
-            modelBuilder.Entity("EFCompleteGuide.Model.Models.FluentBookAuthor", b =>
-                {
-                    b.HasOne("EFCompleteGuide.Model.Models.FluentAuthor", "FluentAuthor")
-                        .WithMany("FluentBookAuthors")
-                        .HasForeignKey("FluentAuthor_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EFCompleteGuide.Model.Models.FluentBook", "FluentBook")
-                        .WithMany("FluentBookAuthors")
-                        .HasForeignKey("FluentBook_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("FluentAuthor");
-
-                    b.Navigation("FluentBook");
-                });
-
             modelBuilder.Entity("EFCompleteGuide.Model.Models.Author", b =>
                 {
                     b.Navigation("BookAuthors");
@@ -361,16 +329,6 @@ namespace EFCompleteGuide.DataAccess.Migrations
             modelBuilder.Entity("EFCompleteGuide.Model.Models.BookDetail", b =>
                 {
                     b.Navigation("Book");
-                });
-
-            modelBuilder.Entity("EFCompleteGuide.Model.Models.FluentAuthor", b =>
-                {
-                    b.Navigation("FluentBookAuthors");
-                });
-
-            modelBuilder.Entity("EFCompleteGuide.Model.Models.FluentBook", b =>
-                {
-                    b.Navigation("FluentBookAuthors");
                 });
 
             modelBuilder.Entity("EFCompleteGuide.Model.Models.FluentBookDetail", b =>
