@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace EFCompleteGuide.Model.Models
@@ -10,5 +11,7 @@ namespace EFCompleteGuide.Model.Models
         public string Name { get; set; }
         [Required]
         public string Location { get; set; }
+
+        public List<Book> Books { get; set; }
     }
 }
