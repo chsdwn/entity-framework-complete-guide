@@ -14,6 +14,9 @@ namespace EFCompleteGuide.DataAccess.Data
                 .Entity<BookAuthor>()
                 .HasKey(bookAuthor => new { bookAuthor.Author_Id, bookAuthor.Book_Id });
 
+            modelBuilder.Entity<Category>().ToTable("tbl_Categories");
+            modelBuilder.Entity<Category>().Property(c => c.Name).HasColumnName("CategoryName");
+
             #region FLUENT_MODELS
             modelBuilder.Entity<FluentAuthor>().HasKey(a => a.Author_Id);
             modelBuilder.Entity<FluentAuthor>().Property(a => a.FirstName).IsRequired();
@@ -38,6 +41,7 @@ namespace EFCompleteGuide.DataAccess.Data
         public DbSet<Book> Books { get; set; }
         public DbSet<BookDetail> BookDetails { get; set; }
         public DbSet<BookAuthor> BookAuthors { get; set; }
+        public DbSet<Category> Categories { get; set; }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Publisher> Publishers { get; set; }
 
