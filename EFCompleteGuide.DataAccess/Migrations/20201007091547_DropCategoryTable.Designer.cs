@@ -3,14 +3,16 @@ using System;
 using EFCompleteGuide.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EFCompleteGuide.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201007091547_DropCategoryTable")]
+    partial class DropCategoryTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,9 +49,6 @@ namespace EFCompleteGuide.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("BookDetail_Id")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("ISBN")
                         .IsRequired()
                         .HasMaxLength(15)
@@ -64,30 +63,7 @@ namespace EFCompleteGuide.DataAccess.Migrations
 
                     b.HasKey("Book_Id");
 
-                    b.HasIndex("BookDetail_Id")
-                        .IsUnique();
-
                     b.ToTable("Books");
-                });
-
-            modelBuilder.Entity("EFCompleteGuide.Model.Models.BookDetail", b =>
-                {
-                    b.Property<int>("BookDetail_Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("NumberOfChapters")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("NumberOfPages")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<double>("Weight")
-                        .HasColumnType("REAL");
-
-                    b.HasKey("BookDetail_Id");
-
-                    b.ToTable("BookDetail");
                 });
 
             modelBuilder.Entity("EFCompleteGuide.Model.Models.Genre", b =>
@@ -122,22 +98,6 @@ namespace EFCompleteGuide.DataAccess.Migrations
                     b.HasKey("Publisher_Id");
 
                     b.ToTable("Publishers");
-                });
-
-            modelBuilder.Entity("EFCompleteGuide.Model.Models.Book", b =>
-                {
-                    b.HasOne("EFCompleteGuide.Model.Models.BookDetail", "BookDetail")
-                        .WithOne("Book")
-                        .HasForeignKey("EFCompleteGuide.Model.Models.Book", "BookDetail_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("BookDetail");
-                });
-
-            modelBuilder.Entity("EFCompleteGuide.Model.Models.BookDetail", b =>
-                {
-                    b.Navigation("Book");
                 });
 #pragma warning restore 612, 618
         }
