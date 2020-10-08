@@ -16,7 +16,8 @@ namespace EFCompleteGuide.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var authors = _dbContext.Authors.ToList();
+            return View(authors);
         }
 
         public IActionResult Upsert(int? id)
